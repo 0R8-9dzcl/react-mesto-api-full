@@ -1,0 +1,6 @@
+.popup__auth-img {
+	border-style: none;
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+}

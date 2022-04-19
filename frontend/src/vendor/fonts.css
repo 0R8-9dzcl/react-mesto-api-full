@@ -1,0 +1,35 @@
+
+@font-face {
+	font-display: swap;
+	font-family: 'Inter';
+	font-style:  normal;
+	font-weight: 400;
+	src: url("./fonts/Inter-Regular.woff2") format("woff2"),
+		url("./fonts/Inter-Regular.woff") format("woff");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Inter';
+	font-style:  normal;
+	font-weight: 500;
+	src: url("./fonts/Inter-Medium.woff2") format("woff2"),
+		url("./fonts/Inter-Medium.woff") format("woff");
+}
+
+@font-face {
+	font-display: swap;
+	font-family: 'Inter';
+	font-style:  normal;
+	font-weight: 900;
+	src: url("./fonts/Inter-Black.woff2") format("woff2"),
+		url("./fonts/Inter-Black.woff") format("woff");
+}
+
+/* некорректно подключён шрифт (начертание Bold в проекте не используется,
+его нужно удалить. Вместо него нужно добавить начертание, соответствующее
+font-weight: 500, оно используется в profile__title по макету. Чтобы увидеть,
+что шрифт подключен, нужно будет поменять правило в css файле, сейчас там 400 вместо 500) */
+
+/* 900 используется в card__title
+400 в profile__caption */

@@ -1,0 +1,9 @@
+.auth__container {
+    width: 358px;
+    margin: 60px auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: nowrap;
+}

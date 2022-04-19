@@ -1,0 +1,11 @@
+.alert {
+	height: 36px;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	border-radius: 10px;
+	visibility: hidden;
+    opacity: 0;
+    transition: visibility .2s linear, opacity .2s linear;
+	background-color: red;
+}
