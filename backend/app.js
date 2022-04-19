@@ -10,6 +10,7 @@ const CardRouter = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
 const NotFoundError = require('./errors/NotFoundError');
 const regExp = require('./utils/regex'); // регулярка
+const { requestLogger, errorLogger } = require('./middlewares/logger'); // импорт логов
 
 const { PORT = 3000 } = process.env;
 mongoose.connect('mongodb://localhost:27017/mestodb');
@@ -18,6 +19,9 @@ const app = express();
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(requestLogger); // подключаем логгер запросов
+
 // роуты неавторизованого пользователя
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -43,6 +47,8 @@ app.use('*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемый ресурс не найден'));
 });
 // обработчики ошибок
+app.use(errorLogger); // подключаем логгер ошибок
+
 app.use(errors()); // обработчик ошибок celebrate
 // Централизованная обработка ошибок
 app.use((err, req, res, next) => {
