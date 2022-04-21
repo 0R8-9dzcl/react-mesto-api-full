@@ -1,6 +1,13 @@
 .popup__auth-img {
+    margin: 60px auto 32px;
 	border-style: none;
     height: 120px;
     width: 120px;
     object-fit: cover;
+}
+
+@media screen and (max-width: 940px) {
+    .popup__auth-img {
+        margin: 50px auto 40px;
+    }
 }

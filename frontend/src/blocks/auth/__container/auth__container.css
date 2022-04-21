@@ -7,3 +7,9 @@
     align-content: center;
     flex-wrap: nowrap;
 }
+
+@media screen and (max-width: 940px) {
+    .auth__container {
+        margin: 40px auto;    
+    }
+}

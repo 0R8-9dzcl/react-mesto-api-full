@@ -12,3 +12,9 @@
 .auth__ask:hover {
     opacity: .6;
 }
+
+@media screen and (max-width: 940px) {
+    .auth__ask {
+        margin-top: 20px;
+    }
+}

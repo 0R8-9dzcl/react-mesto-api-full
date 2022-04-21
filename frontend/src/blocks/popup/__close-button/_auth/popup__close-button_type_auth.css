@@ -2,3 +2,9 @@
 	top: -44px;
     right: -44px;
 }
+
+@media screen and (max-width: 940px) {
+	.popup__close-button_type_auth {
+		right: -7px;
+	}
+}
