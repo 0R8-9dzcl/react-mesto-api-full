@@ -13,7 +13,16 @@
     outline: none;
     background: #000
 }
-
 .auth__input:first-of-type {
 	margin-top: 51px;
+}
+
+@media screen and (max-width: 940px) {
+    .auth__input {
+        width: calc(100% - 60px);
+        margin: 3px auto 0;
+    }
+    .auth__input:first-of-type {
+        margin-top: 42px;
+    }    
 }

@@ -14,3 +14,13 @@
 .auth__submit:hover {
     opacity: .85;
 }
+
+@media screen and (max-width: 940px) {
+    .auth__submit {
+        height: 46px;
+		margin: 146px auto 0;
+        width: calc(100% - 60px);
+        font-size: 16px;
+        line-height: 19px;
+    }
+}

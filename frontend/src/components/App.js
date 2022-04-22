@@ -74,7 +74,6 @@ function App() {
 	}
 	//регистрация пользователя
 	function handleRegister(password, email) {
-		console.log(password, email);
 		auth.register(password, email)
 		.then((res) => {
 			history.push('/sign-in');
