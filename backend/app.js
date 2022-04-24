@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { celebrate, Joi, errors } = require('celebrate'); // валидатор запросов
+const cors = require('./middlewares/cors'); // импорт CORS
 const auth = require('./middlewares/auth');
 const userRouter = require('./routes/users');
 const CardRouter = require('./routes/cards');
@@ -15,6 +16,8 @@ const { requestLogger, errorLogger } = require('./middlewares/logger'); // им�
 const { PORT = 3000 } = process.env;
 mongoose.connect('mongodb://localhost:27017/mestodb');
 const app = express();
+// включаю корс
+app.use(cors);
 // подключаю парсеры
 app.use(cookieParser());
 app.use(bodyParser.json());
