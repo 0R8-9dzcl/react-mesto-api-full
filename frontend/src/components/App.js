@@ -45,14 +45,10 @@ function App() {
 			Promise.all([api.getUserInfo(), api.getCards()])
 			.then(([userInfo, cardList]) => {
 				setCurrentUser(userInfo);
-				setCards(cardList)
+				setCards(cardList);
+				setHeaderEmail(userInfo.email);				
 			})
-			.catch(err => console.log(err))
-			api.getCards()
-			.then((cardList) => {
-				setCards(cardList)
-			})
-			.catch(err => console.log(err))
+			.catch(err => console.log(err));
 		}
 	}, [loggedIn]); // добавил зависимость
 	// Popups
@@ -93,10 +89,8 @@ function App() {
 	function handleLogin(password, email) {
 		auth.login(password, email)
 		.then(data => {
-			if(data.token) {
-				localStorage.setItem('jwt', data.token);
-				setLoggedIn(true);
-				setHeaderEmail(email)
+			if(data) {
+				setLoggedIn(true);			
 			}
 		})
 		.catch((err) => {
