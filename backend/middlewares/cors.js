@@ -1,8 +1,7 @@
 const allowedCors = [
-  'https://api.0R8-9dzcl.nomoredomains.work',
-  'http://api.0R8-9dzcl.nomoredomains.work',
   'https://0R8-9dzcl.nomoredomains.work',
   'http://0R8-9dzcl.nomoredomains.work',
+  'http://localhost:3000',
 ];
 // Значение для заголовка Access-Control-Allow-Methods по умолчанию (разрешены все типы запросов)
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
