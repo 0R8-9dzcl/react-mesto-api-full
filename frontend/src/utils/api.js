@@ -99,7 +99,8 @@ class Api{
 const api = new Api({
     url: BASE_URL,
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+		'credentials': 'include',
     }
 })
 export default api;

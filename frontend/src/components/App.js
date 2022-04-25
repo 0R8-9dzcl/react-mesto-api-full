@@ -46,7 +46,7 @@ function App() {
 			.then(([userInfo, cardList]) => {
 				setCurrentUser(userInfo);
 				setCards(cardList);
-				setHeaderEmail(userInfo.email);				
+				setHeaderEmail(userInfo.email);
 			})
 			.catch(err => console.log(err));
 		}
@@ -90,7 +90,7 @@ function App() {
 		auth.login(password, email)
 		.then(data => {
 			if(data) {
-				setLoggedIn(true);			
+				setLoggedIn(true);
 			}
 		})
 		.catch((err) => {
@@ -102,19 +102,15 @@ function App() {
 
 	// провеарка токена
 	const tokenCheck = () => {
-		const jwt = localStorage.getItem('jwt');
-		if(jwt) {
-			auth.getAuthorization(jwt)
-			.then(data => {
-				if(data) {
-					setHeaderEmail(data.data.email)
-				}
+		auth.getAuthorization()
+		.then(data => {
+			if (data) {
 				setLoggedIn(true);
-			})
-			.catch((err) => {
-				console.log(err); 
-			});
-		}
+			}
+		})
+		.catch((err) => {
+			console.log(err); 
+		});
 	}
 	
 	React.useEffect(() => {
