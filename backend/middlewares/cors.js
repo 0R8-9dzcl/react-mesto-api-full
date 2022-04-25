@@ -1,6 +1,6 @@
 const allowedCors = [
-  'https://0R8-9dzcl.nomoredomains.work',
-  'http://0R8-9dzcl.nomoredomains.work',
+  'https://0r8-9dzcl.nomoredomains.work',
+  'http://0r8-9dzcl.nomoredomains.work',
   'http://localhost:3000',
 ];
 // Значение для заголовка Access-Control-Allow-Methods по умолчанию (разрешены все типы запросов)
@@ -15,12 +15,10 @@ const cors = (req, res, next) => {
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', true);
-    console.log('domen is coorect');
   }
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', requestHeaders);
-    console.log(req.headers.origin);
     res.status(200).send();
     return;
   }
