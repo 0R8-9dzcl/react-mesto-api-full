@@ -1,8 +1,10 @@
 import React from 'react';
 import logo from '../images/header-logo.svg';
 import { Route, Link } from 'react-router-dom';
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Header({ loggedIn , headerEmail, logout }) {
+	const currentUser = React.useContext(CurrentUserContext);
 	function handleClickLogout(e) {
 		e.preventDefault();
 		logout();
@@ -11,7 +13,7 @@ function Header({ loggedIn , headerEmail, logout }) {
 		<header className="header">
 			<img className="header__logo" src={logo} alt="логтип Место-Россия" />
 			<div className="header__auth">
-				{loggedIn && <p className="header__auth-email">{headerEmail}</p>}
+				{loggedIn && <p className="header__auth-email">{currentUser.email}</p>}
 				<Route path="/sign-in">
 					<Link className="header__auth-button" to="/sign-up">Регистрация</Link>
 				</Route>

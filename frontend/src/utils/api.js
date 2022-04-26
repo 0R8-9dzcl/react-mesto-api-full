@@ -14,6 +14,7 @@ class Api{
 	getCards() {
 		return fetch(this._url + '/cards', {
 			method: 'GET',
+			credentials: 'include',
 			headers: this._headers
 		})
 		.then(res => {
@@ -23,6 +24,7 @@ class Api{
 	postCards(name, link) {
 		return fetch(this._url + '/cards', {
 			method: 'POST',
+			credentials: 'include',
 			headers: this._headers,
 			body: JSON.stringify({
 				name: name,
@@ -36,6 +38,7 @@ class Api{
 	getUserInfo() {
 		return fetch(this._url + '/users/me', {
 			method: 'GET',
+			credentials: 'include',
 			headers: this._headers
 		})
 		.then(res => {
@@ -45,10 +48,11 @@ class Api{
 	setUserInfo(name, caption) {
 		return fetch(this._url + '/users/me', {
 			method: 'PATCH',
+			credentials: 'include',
 			headers: this._headers,
 			body: JSON.stringify({
-                name: name,
-                about: caption
+			name: name,
+			about: caption
 			})
 		})
 		.then(res => {
@@ -58,9 +62,10 @@ class Api{
 	updAvatar(src) {
 		return fetch(this._url + '/users/me/avatar', {
 			method: 'PATCH',
+			credentials: 'include',
 			headers: this._headers,
 			body: JSON.stringify({
-				avatar: src
+			avatar: src
 			})
 		})
 		.then(res => {
@@ -70,6 +75,7 @@ class Api{
 	deleteCard(cardId) {
 		return fetch(this._url + `/cards/${cardId}`, {
 			method: 'DELETE',
+			credentials: 'include',
 			headers: this._headers
 		})
 		.then(res => {
@@ -78,16 +84,18 @@ class Api{
 	}
 	changeLikeCardStatus(cardId, isLiked) {
 		if(isLiked) {
-			return fetch(this._url + `/cards/likes/${cardId}`, {
+			return fetch(this._url + `/cards/${cardId}/likes`, {
 				method: 'PUT',
+				credentials: 'include',
 				headers: this._headers
 			})
 			.then(res => {
 				return this._checkOk(res)
 			})
 		} else {
-			return fetch(this._url + `/cards/likes/${cardId}`, {
+			return fetch(this._url + `/cards/${cardId}/likes`, {
 				method: 'DELETE',
+				credentials: 'include',
 				headers: this._headers
 			})
 			.then(res => {
@@ -99,8 +107,7 @@ class Api{
 const api = new Api({
     url: BASE_URL,
     headers: {
-        'Content-Type': 'application/json',
-		'credentials': 'include',
+        'Content-Type': 'application/json'
     }
 })
 export default api;

@@ -28,9 +28,6 @@ function App() {
 	// стейт логина
 	const [loggedIn, setLoggedIn] = React.useState(false);
 
-	// стейт хедера
-	const [headerEmail, setHeaderEmail] = React.useState('');
-
 	// стейт infotooltip
 	const [registerSuccess, setRegisterSuccess] = React.useState(false); // open popup
 	const [infoSuccess, setInfoSuccess] = React.useState(true); // упешно или нет прошла регистрация
@@ -38,15 +35,14 @@ function App() {
 	// хук истории 
 	const history = useHistory();
 	// currenUser
-	const [currentUser, setCurrentUser] = React.useState({ name:'', about:''});
+	const [currentUser, setCurrentUser] = React.useState({ _id: '', email: '', name:'', about:'', avatar: '' });
 	// объединил одним хуком и условием
 	React.useEffect(() => {
 		if(loggedIn) {
 			Promise.all([api.getUserInfo(), api.getCards()])
 			.then(([userInfo, cardList]) => {
-				setCurrentUser(userInfo);
-				setCards(cardList);
-				setHeaderEmail(userInfo.email);
+				setCurrentUser(userInfo.data);
+				setCards(cardList.data);
 			})
 			.catch(err => console.log(err));
 		}
@@ -125,9 +121,16 @@ function App() {
 
 	// выход пользователся
 	function handleLogout() {
-		setLoggedIn(false);
-		setHeaderEmail('');
-		localStorage.removeItem('jwt');
+		api.logout()
+		.then((data) => {
+			if (data) {
+				setLoggedIn(false);
+				setCurrentUser({ _id: '', email: '', name:'', about:'', avatar: '' });
+			}
+		})
+		.catch(err => {
+			console.log(err);
+		});
 		history.push('/sign-in');
 	}
 	// закрытие попапов
@@ -153,16 +156,16 @@ function App() {
 	// UserData
 	function handleUpdateUser(data) {
 		api.setUserInfo(data.name, data.description)
-		.then(res => {
-			setCurrentUser(res);
+		.then(user => {
+			setCurrentUser(user.data);
 			closeAllPopups();
 		})
 		.catch(err => console.log(err));
 	}
 	function handleUpdateAvatar(data) {
 		api.updAvatar(data.avatar)
-		.then(res => {
-			setCurrentUser(res);
+		.then(user => {
+			setCurrentUser(user.data);
 			closeAllPopups();
 		})
 		.catch(err => console.log(err));
@@ -171,12 +174,12 @@ function App() {
 	
 	function handleCardLike(card) {
 		// Проверяем, есть ли уже лайк на этой карточке
-		const isLiked = card.likes.some(i => i._id === currentUser._id);
+		const isLiked = card.likes.some(likedUserId => likedUserId === currentUser._id);
 		
 		// Отправляем запрос в API и получаем обновлённые данные карточки
 		api.changeLikeCardStatus(card._id, !isLiked)
-		.then((newCard) => {
-			setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+		.then((likedCard) => {
+			setCards((state) => state.map((c) => c._id === card._id ? likedCard.data : c));
 		})
 		.catch(err => console.log(err));
 	} 
@@ -194,7 +197,7 @@ function App() {
 	function handleAddPlace(data) {
 		api.postCards(data.name, data.link)
 		.then(newCard => {
-			setCards([newCard, ...cards]);
+			setCards([newCard.data, ...cards]);
 			closeAllPopups();
 		})
 		.catch(err => console.log(err));
@@ -202,13 +205,13 @@ function App() {
 
 	return (
 		<CurrentUserContext.Provider value={currentUser}>
-			<Header loggedIn={loggedIn} headerEmail={headerEmail} logout={handleLogout} />
+			<Header loggedIn={loggedIn} logout={handleLogout} />
 			<Switch>
 				<Route path="/sign-in">
-					<Login setHeaderEmail={setHeaderEmail} login={handleLogin} logout={handleLogout} />
+					<Login login={handleLogin} />
 				</Route>
 				<Route path="/sign-up">
-					<Register setHeaderEmail={setHeaderEmail} register={handleRegister} />
+					<Register register={handleRegister} />
 				</Route>
 				<ProtectedRoute
 					path="/"

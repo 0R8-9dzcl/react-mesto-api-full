@@ -12,9 +12,9 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
         onCardDelete(card);
     };
 	const currentUser = React.useContext(CurrentUserContext);
-    const isOwn = card.owner._id === currentUser._id;
+    const isOwn = card.owner === currentUser._id;
     const cardDeleteButtonClassName = `card__delete ${isOwn && 'card__delete_style_active'}`;
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(likedUserId => likedUserId === currentUser._id);
     const cardLikeButtonClassName = `card__like ${isLiked && 'card__like_active'}`; 
 	return (
 		<li className="card">
