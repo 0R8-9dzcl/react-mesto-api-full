@@ -15,7 +15,6 @@ export const register = (password, email) => {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'credentials': 'include',
 		},
 		body: JSON.stringify({ password, email })
 	})
@@ -27,8 +26,8 @@ export const login = (password, email) => {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'credentials': 'include',
 		},
+		'credentials': 'include',
 		body: JSON.stringify({ password, email })
 	})
 	.then(res => checkOk(res))
@@ -37,9 +36,9 @@ export const login = (password, email) => {
 export const getAuthorization = () => {
 	return fetch(`${BASE_URL}/users/me`, {
 		method: 'GET',
+		'credentials': 'include',
 		headers: {
 			'Content-Type': 'application/json',
-			'credentials': 'include',
 		}
 	})
 	.then(res => checkOk(res))
