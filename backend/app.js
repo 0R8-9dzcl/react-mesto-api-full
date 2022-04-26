@@ -8,7 +8,7 @@ const cors = require('./middlewares/cors'); // импорт CORS
 const auth = require('./middlewares/auth');
 const userRouter = require('./routes/users');
 const CardRouter = require('./routes/cards');
-const { login, createUser } = require('./controllers/users');
+const { login, createUser, logout } = require('./controllers/users');
 const NotFoundError = require('./errors/NotFoundError');
 const regExp = require('./utils/regex'); // регулярка
 const { requestLogger, errorLogger } = require('./middlewares/logger'); // импорт логов
@@ -51,6 +51,7 @@ app.use(auth);
 // подключаю роутинг
 app.use('/', userRouter);
 app.use('/', CardRouter);
+app.post('/logout', logout);
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемый ресурс не найден'));
 });
