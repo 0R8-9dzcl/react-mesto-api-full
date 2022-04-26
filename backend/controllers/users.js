@@ -68,6 +68,13 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
+module.exports.logout = (req, res, next) => {
+  res.clearCookie('jwt')
+    .status(200)
+    .send({ message: 'Выход выполнен' });
+  next();
+};
+
 module.exports.findUsers = (req, res, next) => {
   User.find({})
     .then((user) => res.status(200).send({ data: user }))
