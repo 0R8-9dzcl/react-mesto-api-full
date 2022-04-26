@@ -33,6 +33,17 @@ export const login = (password, email) => {
 	.then(res => checkOk(res))
 }
 
+export const logout = () => {
+	return fetch(`${BASE_URL}/logout`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		'credentials': 'include',
+	})
+	.then(res => checkOk(res))
+}
+
 export const getAuthorization = () => {
 	return fetch(`${BASE_URL}/users/me`, {
 		method: 'GET',
