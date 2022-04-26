@@ -17,6 +17,7 @@ function DeletePlacePopup(props) {
 			buttonText={'Да'}
 			isOpen={props.isOpen}
 			onSubmit={handleSubmit}
+			onClose={props.onClose}
 		/>
 	)
 }
