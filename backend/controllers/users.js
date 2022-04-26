@@ -72,7 +72,9 @@ module.exports.login = (req, res, next) => {
 
 module.exports.logout = (req, res, next) => {
   res.clearCookie('jwt', {
+    httpOnly: true,
     sameSite: 'none',
+    secure: true,
   })
     .status(200)
     .send({ message: 'Выход выполнен' });
