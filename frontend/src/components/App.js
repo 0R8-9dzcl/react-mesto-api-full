@@ -121,17 +121,17 @@ function App() {
 
 	// выход пользователся
 	function handleLogout() {
-		api.logout()
+		auth.logout()
 		.then((data) => {
 			if (data) {
 				setLoggedIn(false);
 				setCurrentUser({ _id: '', email: '', name:'', about:'', avatar: '' });
+				history.push('/sign-in');
 			}
 		})
 		.catch(err => {
 			console.log(err);
 		});
-		history.push('/sign-in');
 	}
 	// закрытие попапов
 	const closeAllPopups = () => {
