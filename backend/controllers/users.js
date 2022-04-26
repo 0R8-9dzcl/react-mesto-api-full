@@ -71,7 +71,9 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.logout = (req, res, next) => {
-  res.clearCookie('jwt')
+  res.clearCookie('jwt', {
+    sameSite: 'none',
+  })
     .status(200)
     .send({ message: 'Выход выполнен' });
   next();
