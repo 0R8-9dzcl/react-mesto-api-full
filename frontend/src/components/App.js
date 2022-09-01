@@ -225,8 +225,8 @@ function App() {
 					onCardLike={handleCardLike}
 					onCardDelete={handleDeletePlaceClick}
 				/>
-				<ProtectedRoute loggedIn={loggedIn} component={Footer} />
 			</Switch>
+			{ loggedIn ? <Footer /> : <></> }
 			<EditAvatarPopup
 				isOpen={isEditAvatarPopupOpen} 
 				onClose={closeAllPopups}
