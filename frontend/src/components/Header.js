@@ -3,7 +3,7 @@ import logo from '../images/header-logo.svg';
 import { Route, Link } from 'react-router-dom';
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function Header({ loggedIn , headerEmail, logout }) {
+function Header({ loggedIn, logout }) {
 	const currentUser = React.useContext(CurrentUserContext);
 	function handleClickLogout(e) {
 		e.preventDefault();
