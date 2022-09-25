@@ -45,7 +45,7 @@ app.use(auth);
 // подключаю роутинг
 app.use('/', userRouter);
 app.use('/', CardRouter);
-app.post('/logout', logout);
+app.post('/signout', logout);
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемый ресурс не найден'));
 });
