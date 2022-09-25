@@ -70,7 +70,7 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.logout = (req, res, next) => {
+module.exports.logout = (req, res) => {
   res.clearCookie('jwt', {
     httpOnly: true,
     sameSite: 'none',
@@ -78,7 +78,6 @@ module.exports.logout = (req, res, next) => {
   })
     .status(200)
     .send({ message: 'Выход выполнен' });
-  next();
 };
 
 module.exports.findUsers = (req, res, next) => {
@@ -103,24 +102,12 @@ module.exports.findUserById = (req, res, next) => {
 };
 
 module.exports.updateUser = (req, res, next) => {
-  const { name, about } = req.body;
-  User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователь по указанному _id не найден');
-      }
-      return res.status(200).send({ data: user });
-    })
-    .catch((err) => {
-      if (err.name === 'ValidationError') next(new BadReqError('Переданы некорректные данные при обновлении данных пользователя'));
-      if (err.name === 'CastError') next(new BadReqError('Переданы некорректные данные при обновлении данных пользователя'));
-      next(err);
-    });
-};
-
-module.exports.updateAvatar = (req, res, next) => {
-  const { avatar } = req.body;
-  User.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
+  const { name, about, avatar } = req.body;
+  User.findByIdAndUpdate(
+    req.user._id,
+    avatar ? { avatar } : { name, about },
+    { new: true, runValidators: true },
+  )
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Пользователь по указанному _id не найден');
