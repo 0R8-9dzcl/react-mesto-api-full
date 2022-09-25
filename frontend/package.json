@@ -21,7 +21,7 @@
   "scripts": {
     "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy": "npm run build && scp -r ./build/* ssh gen@158.160.5.175:~/react-mesto-api-full/frontend/build",
+    "deploy": "npm run build && scp -r ./build/* ssh gen@130.193.34.132:~/react-mesto-api-full/frontend/build",
     "start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
