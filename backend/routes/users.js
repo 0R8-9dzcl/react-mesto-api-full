@@ -6,7 +6,6 @@ const {
   findUsers,
   findUserById,
   updateUser,
-  updateAvatar,
 } = require('../controllers/users');
 
 // роуты пользователей
@@ -24,7 +23,7 @@ router.patch('/users/me/avatar', celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().required().pattern(regExp),
   }),
-}), updateAvatar);
+}), updateUser);
 
 router.get('/users/:userId', celebrate({
   params: Joi.object().keys({
