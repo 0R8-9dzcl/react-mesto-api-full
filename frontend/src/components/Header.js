@@ -21,7 +21,13 @@ function Header({ loggedIn, logout }) {
 					<Link className="header__auth-button" to="/sign-in">Войти</Link>
 				</Route>
 				<Route exact path="/">
-					<Link className="header__auth-button header__auth-button_type_authorized" to="/sign-in" onClick={handleClickLogout} >Выйти</Link>
+					<Link
+						className="header__auth-button header__auth-button_type_authorized"
+						to="/sign-in"
+						onClick={handleClickLogout}
+					>
+						Выйти
+					</Link>
 				</Route>
 			</div>
 		</header>
